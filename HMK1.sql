@@ -1,0 +1,197 @@
+SHOW CHARACTER SET;
+SET GLOBAL local_infile = 'ON';
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+
+create table candiv (
+UNFLID VARCHAR(30) PRIMARY KEY,
+CANCELLED DOUBLE,
+CANCELLATION_CODE TEXT,
+DIVERTED DOUBLE);
+#FOREIGN KEY (UNFLID) REFERENCES apperf(UNFLID));show error;
+
+
+CREATE TABLE january(
+UNFLID VARCHAR(30) PRIMARY KEY,
+DAY_OF_MONTH INT,
+DAY_OF_WEEK INT,
+FL_DATE TEXT,
+OP_CARRIER_AIRLINE_ID INT,
+TAIL_NUM TEXT,
+OP_CARRIER_FL_NUM INT,
+ORIGIN_AIRPORT_ID INT,
+ORIGIN_CITY_NAME TEXT,
+ORIGIN_STATE_NM TEXT,
+DEST_CITY_NAME TEXT,
+DEST_STATE_NM TEXT,
+CRS_DEP_TIME INT);
+
+
+CREATE TABLE fsummary (
+UNFLID VARCHAR(30) PRIMARY KEY,
+CRS_ELAPSED_TIME DOUBLE,
+ACTUAL_ELAPSED_TIME DOUBLE,
+AIR_TIME DOUBLE,
+FLIGHTS DOUBLE,
+DISTANCE DOUBLE,
+DISTANCE_GROUP INT
+);
+
+
+CREATE TABLE depperf (
+UNFLID VARCHAR(30) PRIMARY KEY,
+DEP_TIME DOUBLE,
+DEP_DELAY DOUBLE,
+DEP_DEL15 DOUBLE,
+DEP_DELAY_GROUP DOUBLE
+);
+
+CREATE TABLE arrperf (
+UNFLID VARCHAR(30) PRIMARY KEY,
+CRS_ARR_TIME DOUBLE,
+ARR_TIME DOUBLE,
+ARR_DELAY DOUBLE,
+ARR_DEL15 DOUBLE,
+ARR_DELAY_GROUP DOUBLE);
+#FOREIGN KEY (UNFLID) REFERENCES candiv(UNFLID));
+
+#we load arrperf
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewarrperf2020.csv"
+INTO TABLE arrperf 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewarrperf2015.csv"
+INTO TABLE arrperf 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewarrperf2010.csv"
+INTO TABLE arrperf 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+#we load candiv
+#here we load Candiv data from the 3 csv files
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewcandiv2020.csv"
+INTO TABLE candiv 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewcandiv2015.csv"
+INTO TABLE candiv 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewcandiv2010.csv"
+INTO TABLE candiv 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+#now depperf
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewdepperf2020.csv"
+INTO TABLE depperf 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewdepperf2015.csv"
+INTO TABLE depperf 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewdepperf2010.csv"
+INTO TABLE depperf 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+#now fsummary
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewfsumm2020.csv"
+INTO TABLE fsummary 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewfsumm2015.csv"
+INTO TABLE fsummary 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewfsumm2010.csv"
+INTO TABLE fsummary 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+#now january
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewjan2020.csv"
+INTO TABLE january 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewjan2015.csv"
+INTO TABLE january 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
+
+LOAD DATA LOCAL INFILE  
+"C:\\Users\\leona\\Desktop\\DMproject\\LeoDM\\newnewjan2010.csv"
+INTO TABLE january 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+show warnings;
